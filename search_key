@@ -1,0 +1,86 @@
+import requests
+import time
+import execjs
+import json
+
+
+def get_exl():
+    js_context = execjs.compile(
+        """
+        var S = "1";
+    function w() {
+        var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}
+            , t = 'e'
+            , n = 'x'
+            , a = S
+            , r = String(parseInt((new Date).getTime()));
+        return e[t + n + a] = function (e) {
+            for (var t = '9527'.split("").map(function (e) {
+                return Number(e)
+            }), n = e.split("").map(function (e) {
+                return Number(e)
+            }), a = 7 * n.reduce(function (e, t) {
+                return e + t
+            }, 0) % 10, r = [], i = 0, o = 0; o < n.length; o++)
+                r[o] = (n[o] + t[i]) % 10,
+                    i = (i + 1) % t.length;
+            for (var c = t.length % n.length, s = Array.apply(null, {
+                length: 10
+            }), l = 0; l < c; l++)
+                s[l] = r[r.length - l - 1];
+            s[c] = a;
+            for (var u = c + 1; u < r.length + 1; u++)
+                s[u] = r[r.length - u];
+            return C(s.join(""))
+        }(r),
+            t = null,
+            n = null,
+            a = null,
+            e
+    }
+
+    function C(e) {
+        for (var t = [], n = function () {
+            for (var e = [], t = 0; t < 36; t++)
+                t >= 0 && t <= 9 ? e.push(t) : e.push(String.fromCharCode(t + 87));
+            return e
+        }(); e;) {
+            var a = e % 36;
+            t.unshift(n[a]),
+                e = parseInt(e / 36)
+        }
+        return t.join("")
+    }
+
+        """
+    )
+    eval_str = "js_context.call('w')"
+    result = eval(eval_str)
+    return result['ex1']
+
+get_exl()
+
+
+def get_search_data(ua, path, token, searchkey):
+    """
+    ua是模拟请求头的ua，
+    path 是查询参数，比如 https://dian.ysbang.cn/#/indexContent?searchKey=啊天哪 维D2磷酸氢钙片&_t=1622687460458 的 path 就是 indexContent
+    token 是登录cookie里面的token值
+    """
+
+    key = {
+        'platform': 'pc',
+        'version': '5.1.0',
+        'ua': ua,
+        'ex': '2021-5-28 16:20 ' + path,
+        'token': token,
+        'searchkey': searchkey,
+        'provider_id': '',
+
+    }
+
+
+
+
+
+
