@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+# @Time    : 2021/10/8 15:45
+# @Author  : lipei
+# @File    : tls_demo.py
+# @Software: PyCharm
+import requests
+import urllib3
+
+url = 'https://xmapi.sfbest.com/brokerservice-server/cms/getClassifyInfo'
+data = {
+    'deviceInfoJson': '{"token":"","deviceType":"66","clientVersion":"4.8.4"}',
+    'paramJson': '{"filterService":1,"switch":false}',
+    'param': '{"token":"","device":"66","version":"2.0","filterService":1,"switch":false}'
+}
+headers = {
+    "Host": "xmapi.sfbest.com",
+    "Connection": "keep-alive",
+    "Content-Length": "370",
+    "content-type": "application/x-www-form-urlencoded",
+    "Accept-Encoding": "gzip,compress,br,deflate",
+    "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_7_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.14(0x18000e2a) NetType/WIFI Language/zh_CN",
+    "Referer": "https://servicewechat.com/wxf82cbb8f1e1d5741/111/page-frame.html"
+}
+
+response = requests.post(url, data=data, headers=headers, verify=False)
+print(response.text)
